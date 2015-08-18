@@ -34,6 +34,7 @@
         $_SESSION['id']   = $row['idUser'];
         $_SESSION['user'] = $row['user'];
         $_SESSION['fn']   = $row['fullname'];
+        $_SESSION['pass'] = $row['pass'];
 
         $sql2 =  "SELECT navbar_menu.*
                 FROM users

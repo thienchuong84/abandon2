@@ -47,33 +47,33 @@ include 'includes/func_mysql.php';
     <?php include 'include_navbar.php'; ?>
 
     <div class="container" id="content">
-      <div class="row">
-        <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="active"><a href="#nav_changePass" aria-control="nav_changePass" role="tab" data-toggle="tab">Change Password</a></li>      
-          <?php 
-            if(isset($_SESSION['navtab'])) { 
-              foreach ($_SESSION['navtab'] as $section => $items) { 
-                echo <<<_END
-                  <li role="presentation"><a href="#$items[3]" aria-control="$items[3]" role="tab" data-toggle="tab">$items[4]</a></li>
+    	<div class="row">
+      		<div class="col-md-10 col-md-offset-1">
+		        <ul class="nav nav-tabs" role="tablist">
+		          <li role="presentation" class="active"><a href="#nav_changePass" aria-control="nav_changePass" role="tab" data-toggle="tab">Change Password</a></li>      
+		          <?php 
+		            if(isset($_SESSION['navtab'])) { 
+		              	foreach ($_SESSION['navtab'] as $section => $items) { 
+		                	echo <<<_END
+		                  	<li role="presentation"><a href="#$items[3]" aria-control="$items[3]" role="tab" data-toggle="tab">$items[4]</a></li>
 _END;
-              }
-            }?>
-        </ul>
-        <div class="tab-content">
-          <div role="tabpanel" class="tab-pane fade in active" id="nav_changePass"><?php include 'settings_changePass.php'; ?></div>
-          <?php
-            if(isset($_SESSION['navtab'])) { 
-              foreach ($_SESSION['navtab'] as $section => $items) {
-                echo <<<_END
-                  <div role="tabpanel" class="tab-pane fade" id="$items[3]" role="tab" data-toggle="tab">$items[2]></div>
+		                }
+		            }?>
+		        </ul>
+		        <div class="tab-content">
+		          	<div role="tabpanel" class="tab-pane fade in active" id="nav_changePass"><?php include 'settings_changePass.php'; ?></div>
+		          	<?php
+		           		if(isset($_SESSION['navtab'])) { 
+		              		foreach ($_SESSION['navtab'] as $section => $items) {
+		                		echo <<<_END
+		                  		<div role="tabpanel" class="tab-pane fade" id="$items[3]" role="tab" data-toggle="tab">$items[2]></div>
 _END;
-              }
-            }?>            
-        </div>
-      </div>
-
-    </div><!-- end .container -->
-
+              			}
+            		}?>            
+        			</div>
+      			</div>
+    		</div>
+    	</div>
     </div><!-- end .container -->
 
   </body>
