@@ -91,7 +91,7 @@ if(!isset($_SESSION["id"])) {
                 </div>
                 <div class="form-group">
                   <label for="callerid">CallerID</label>
-                  <input type="text" class="form-control" id="ntc_callerid" name="ntc_callerid">
+                  <input type="text" class="form-control" id="ntc_callerid" name="ntc_callerid" autocomplete="on">
                 </div>
                 <button type="button" name="submit" class="btn btn-default" id="submit" onclick="ajaxSubmit()">Submit</button>
               </form>

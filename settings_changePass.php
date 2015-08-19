@@ -3,7 +3,8 @@
 	if(!isset($_SESSION['id'])) header("Location:login.php"); 
 ?>
 <div class="row"><div class="col-md-6">
-	<h4><span id="pwmatch-alert"></span></h4>
+	<h4><label id="pwmatch-alert"></label></h4>
+	<h4><label id="result_return"></label></h4>
 </div></div>
 <div class="row">
 	<div class="col-md-6 col-md-offset-0">		
@@ -27,7 +28,7 @@
 				<span id="pwmatch" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> Password Match
 
 			</div>
-			<input type="submit" class="col-xs-12 btn btn-primary btn-load btn-lg" data-loading-text="Change Password..." value="Change Password">
+			<input type="submit" id="submit" class="col-xs-12 btn btn-primary btn-load btn-lg" data-loading-text="Change Password..." value="Change Password">
 		</form>
 	</div>
 </div>
@@ -39,7 +40,24 @@ $("#changePassword").submit(function(event){
 	valid = validateChangePass();
 
 	if(valid){
+		var tmpCurPass 	= $("#cur_pass").val();
+		var tmpNewPass 	= $("#new_pass1").val();
+		var tmpSubmit	= $("#submit").val();
 
+		$.ajax({
+			method: 	"POST",
+			url: 		"settings_ajax.php",
+			data: 		{ curPass: tmpCurPass, newPass: tmpNewPass, submitChangePass: tmpSubmit},
+			//beforeSend: function(xhr){alert("test "+tmpSubmit)},		// hàm này dùng để test value của tmpSubmit
+			success: function(result){		// refer example: http://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_ajax_ajax_async
+				$('#result_return').html(result);
+			},
+			error: function(xhr){
+            	alert("An error occured: " + xhr.status + " " + xhr.statusText);
+            },			
+		}).done(function(msg){
+			// code want use
+		})
 	}else {
 		event.preventDefault();
 	}
@@ -54,7 +72,7 @@ function validateChangePass(){
 		$("#pwmatch-alert").text("Password does not match!!!").show().fadeOut( 4000 );
 		valid = false;
 	}
-	else if(!$("#new_pass1").val().match(/^[0-9]{6,14}$/)) {
+	else if(!$("#new_pass1").val().match(/^[A-Za-z0-9]{6,14}$/)) {		// Regular Express for number from 6->14: /^[0-9]{6,14}$/
 		$("#pwmatch-alert").css("color","red");
 		$("#pwmatch-alert").text("Password much 6 to 14 characters!!!").show().fadeOut( 4000 );
 		valid = false;

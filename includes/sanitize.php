@@ -1,4 +1,13 @@
 <?php
+function mysql_entities_fix_string ($conn, $str) {
+	return htmlentities(mysql_fix_string($conn, $str));
+}
+
+function mysql_fix_string($conn, $str) {
+	if(get_magic_quotes_gpc()) $string = stripcslashes($str);
+	return $conn->real_escape_string($str);
+}
+
 function sannitizeString($var) {
 	$var	= trim($var);
 	$var	= stripslashes($var);
@@ -6,8 +15,6 @@ function sannitizeString($var) {
 	$var	= htmlspecialchars($var);
 	return $var;
 }
-
-
 
 /*
 function test_input($data) {
@@ -17,5 +24,4 @@ function test_input($data) {
     return $data;
 }
 */
-
 ?>

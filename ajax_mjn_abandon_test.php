@@ -1,7 +1,8 @@
 <?php
 include 'includes/config.php';
 include 'includes/functions.php';
-
+session_start();
+if(isset($_POST['id'])) header('Location: index.php');
 
 // set null for variables
 $d = $abandon_date = $callerid = $tmpDate1 = $tmpCallerid1 = "";
@@ -24,7 +25,7 @@ if(isset($_POST['tmpSubmit1'])){
     }
     
     $callerid = $tmpCallerid1; // echo $callerid; //test
-}
+
 ?>
 <div class="row">
   <div class="col-md-12">            
@@ -106,3 +107,7 @@ if(isset($_POST['tmpSubmit1'])){
     </div>
   </div>
 </div><!-- end div row table -->
+<?php
+}else header('Location: abandon.php');
+
+?>

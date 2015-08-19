@@ -2,7 +2,7 @@
   session_start();
 
   require_once 'includes/db_config.php';
-  require_once 'includes/sanitizeSql.php';
+  require_once 'includes/sanitize.php';
 
   include 'includes/functions.php';
   include 'includes/func_mysql.php';
