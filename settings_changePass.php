@@ -4,7 +4,7 @@
 ?>
 <div class="row"><div class="col-md-6">
 	<h4><label id="pwmatch-alert"></label></h4>
-	<h4><label id="result_return"></label></h4>
+	<h4 style="color: red"><label id="result_return"></label></h4>
 </div></div>
 <div class="row">
 	<div class="col-md-6 col-md-offset-0">		
@@ -28,14 +28,18 @@
 				<span id="pwmatch" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> Password Match
 
 			</div>
-			<input type="submit" id="submit" class="col-xs-12 btn btn-primary btn-load btn-lg" data-loading-text="Change Password..." value="Change Password">
+			<input type="button" id="submit" class="col-xs-12 btn btn-primary btn-load btn-lg" data-loading-text="Change Password..." value="Change Password">
 		</form>
 	</div>
 </div>
 
+
+
 <script type="text/javascript">
 // tham khảo link sau check khi submit form : http://api.jquery.com/submit/
-$("#changePassword").submit(function(event){
+
+//$("#changePassword").submit(function(event){		// khi dùng cách này, trang của ta luôn luôn bị reload, thành ra khi lấy giá trị trả về, nó vừa hiện ta cái là reload mất tiêu kết quả, cực kì chú ý vấn đề này
+$("#submit").click(function(event){			// Phải luôn luôn nhớ 1 điều: làm ajax ko bao giờ dùng submit, thay đổi từ cái trên, bắt sự kiện có id="submit" và click thì mới ok. Change type input từ "submit" -> "button"
 	var valid;
 	valid = validateChangePass();
 
@@ -50,13 +54,16 @@ $("#changePassword").submit(function(event){
 			data: 		{ curPass: tmpCurPass, newPass: tmpNewPass, submitChangePass: tmpSubmit},
 			//beforeSend: function(xhr){alert("test "+tmpSubmit)},		// hàm này dùng để test value của tmpSubmit
 			success: function(result){		// refer example: http://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_ajax_ajax_async
-				$('#result_return').html(result);
+				//$('#result_return').html(result);
+				$('#result_return').html(result).show().fadeOut(4000);
 			},
 			error: function(xhr){
             	alert("An error occured: " + xhr.status + " " + xhr.statusText);
-            },			
+            },
 		}).done(function(msg){
 			// code want use
+			//alert(msg);
+			//$("#result_return2").html(msg);
 		})
 	}else {
 		event.preventDefault();
@@ -102,7 +109,7 @@ $("input[type=password]").keyup(function(){
 		$("#lcase").addClass("glyphicon-ok");
 		$("#lcase").css("color","#00A41E");
 	}else {
-		$("#lcase").remoceClass("glyphicon-ok");
+		$("#lcase").removeClass("glyphicon-ok");
 		$("#lcase").addClass("glyphicon-remove");
 		$("#lcase").css("color","#FF0004");
 	}
@@ -126,3 +133,4 @@ $("input[type=password]").keyup(function(){
 	*/
 });
 </script>
+

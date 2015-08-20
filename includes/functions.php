@@ -7,6 +7,8 @@ function convertDateAsterisk($d) {
     return $date;    
 }
 
+
+// ko còn dùng
 // test input variables
 // used in: ajax_mjn_abandon_test.php, login.php
 function test_input($data) {
@@ -16,26 +18,8 @@ function test_input($data) {
     return $data;
 }
 
-// checkUser() function : query to db and authenticated.
-// used in: login.php
-// update Aug 05, 2015 : function này chưa sử dụng ở trang nào
-/*
-function checkUser($user,$pass) {
-    $conn = mysqli(db_host, db_user, db_pass, db3);
 
-    $sql = "SELECT idUser, user, pass, fullname FROM user
-            WHERE user='".$user."' and pass='".$pass."' limit 1";
-
-    $result = mysqli_query($conn, $sql);
-
-    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-
-    if(is_array($row)) {
-        $_SESSION["id"] = $row["idUser"];
-        $_SESSION["user"] = $row["user"];
-    }
-}*/
-
+// ko còn dùng , ap dụng hàm bên includes/db_config.php
 // update Aug 05,2015 : function have_navtab_menu($id_of_user) to check what role user have. And query and load tab in setting of user
 // Function này là 1 function rất đặc biệt, vì nó kết nối db và trả về 1 multi array
 function have_navtab_menu($id_of_user) {
@@ -64,3 +48,24 @@ function have_navtab_menu($id_of_user) {
     mysqli_close($conn);
     return $menu_detail;
 }
+
+
+// create at August 20, 2015 , for hash password from user input
+function hashPass($str) {
+    $str    = trim($str);
+    $str    = stripslashes($str);
+    $str    = strip_tags($str);
+    $str    = htmlspecialchars($str);
+
+    $salt1  = "qm&h*";
+    $salt2  = "pg!@";
+    $token  = hash("ripemd128","$salt1$str$salt2");
+
+    return $token;
+}
+
+
+
+
+
+?>
