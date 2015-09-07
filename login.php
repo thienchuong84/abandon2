@@ -50,7 +50,7 @@
                   WHERE       idUser='".$_SESSION['id']."'";
         $_SESSION['navtab'] = getArrayNum($conn, $sql3);          
                    
-        header("Location:abandon.php");
+        header("Location:mjn_abandon.php");
         //header("Location:test.php");
       }
       else $msg = "Invaid Password";
@@ -58,7 +58,7 @@
     else $msg = "Not exists user '$un_tmp'.";
   }
 
-  if(isset($_SESSION['id'])) header("Location:abandon.php");
+  if(isset($_SESSION['id'])) header("Location:mjn_abandon.php");
   //if(isset($_SESSION['id'])) echo "Welcome " . $_SESSION['fullname'];
 
 
